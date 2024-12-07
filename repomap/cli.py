@@ -7,7 +7,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from .core import OutputFormat, ProjectStructureGenerator
+from .core import ProjectStructureGenerator
 
 console = Console()
 

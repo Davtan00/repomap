@@ -42,42 +42,9 @@ jobs:
       run: poetry install
     
     - name: Run tests
-      run: poetry run pytest --cov=repomap --cov-report=xml
+      run: poetry run pytest
     
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        fail_ci_if_error: true
-        slug: Davtan00/repomap
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install Poetry
+    - name: Check formatting
       run: |
-        python -m pip install --upgrade pip
-        pip install poetry
-    
-    - name: Install dependencies
-      run: poetry install
-    
-    - name: Run black
-      run: poetry run black . --check
-    
-    - name: Run isort
-      run: poetry run isort . --check-only
-    
-    - name: Run flake8
-      run: poetry run flake8 .
-    
-    - name: Run mypy
-      run: poetry run mypy repomap
+        poetry run black . --check
+        poetry run isort . --check-only

@@ -1,7 +1,6 @@
 """Markdown formatter for repository structure."""
 
 from datetime import datetime
-from pathlib import Path
 from typing import Dict, List, Optional
 
 

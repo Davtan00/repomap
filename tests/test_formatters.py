@@ -4,8 +4,6 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-import pytest
-
 from repomap.formatters.ascii import ASCIIFormatter
 from repomap.formatters.html import HTMLFormatter
 from repomap.formatters.json import JSONFormatter
