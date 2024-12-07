@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "repomap"
-version = "0.1.0"
+version = "0.1.2"
 description = "A tool for generating repository structure documentation"
 authors = ["Your Name <your.email@example.com>"]
 license = "MIT"
