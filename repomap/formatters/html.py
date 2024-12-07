@@ -4,9 +4,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional
 
+
 class HTMLFormatter:
     """Format repository structure as an interactive HTML document."""
-    
+
     @staticmethod
     def _get_styles() -> str:
         """Return CSS styles for the HTML tree."""
@@ -66,7 +67,7 @@ class HTMLFormatter:
             }
         </style>
         """
-    
+
     @staticmethod
     def _get_scripts() -> str:
         """Return JavaScript for tree interactivity."""
@@ -107,7 +108,7 @@ class HTMLFormatter:
             });
         </script>
         """
-    
+
     @staticmethod
     def format_header(root_name: str, max_depth: int) -> str:
         """Generate the header section of the HTML document."""
@@ -120,7 +121,7 @@ class HTMLFormatter:
             <button id="collapseAll">Collapse All</button>
         </div>
         """
-    
+
     def format_tree(self, root_path: Path, tree_data: Dict[str, Any], max_depth: int) -> str:
         """Format the entire tree as an HTML document."""
         html_content = f"""
@@ -142,18 +143,17 @@ class HTMLFormatter:
         </html>
         """
         return html_content
-    
+
     def _format_node(self, node: Dict[str, Any], level: int = 0) -> str:
         """Format a single node in the tree."""
-        is_dir = node['type'] == 'directory'
-        name = node['name']
-        
+        is_dir = node["type"] == "directory"
+        name = node["name"]
+
         if is_dir:
-            has_children = 'children' in node and node['children']
+            has_children = "children" in node and node["children"]
             if has_children:
-                children_html = '\n'.join(
-                    self._format_node(child, level + 1)
-                    for child in node['children']
+                children_html = "\n".join(
+                    self._format_node(child, level + 1) for child in node["children"]
                 )
                 return f"""
                 <div>
@@ -164,22 +164,22 @@ class HTMLFormatter:
                 </div>
                 """
             return f'<div><span class="directory">{name}/</span></div>'
-        
+
         # File node
         size_str = ""
-        if 'size_bytes' in node:
-            size = node['size_bytes']
+        if "size_bytes" in node:
+            size = node["size_bytes"]
             if size < 1024:
                 size_str = f" ({size} B)"
             elif size < 1024 * 1024:
                 size_str = f" ({size/1024:.1f} KB)"
             else:
                 size_str = f" ({size/(1024*1024):.1f} MB)"
-        
+
         modified_str = ""
-        if 'last_modified' in node:
+        if "last_modified" in node:
             modified_str = f" - Modified: {node['last_modified']}"
-        
+
         return f"""
         <div class="file">
             <span class="file-name">{name}</span>
