@@ -1,15 +1,15 @@
 """Core functionality for the RepoMap package."""
 
+import fnmatch
 import os
 from datetime import datetime
 from pathlib import Path
-import fnmatch
-from typing import List, Set, Optional, Dict, Any
+from typing import Any, Dict, List, Optional, Set
 
-from .formatters.markdown import MarkdownFormatter
 from .formatters.ascii import ASCIIFormatter
-from .formatters.json import JSONFormatter
 from .formatters.html import HTMLFormatter
+from .formatters.json import JSONFormatter
+from .formatters.markdown import MarkdownFormatter
 
 
 class OutputFormat:

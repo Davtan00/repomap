@@ -2,11 +2,12 @@
 
 import click
 from pathlib import Path
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from .core import ProjectStructureGenerator, OutputFormat
+from .core import OutputFormat, ProjectStructureGenerator
 
 console = Console()
 

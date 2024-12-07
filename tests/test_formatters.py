@@ -1,14 +1,15 @@
-"""Tests for the formatters module."""
+"""Test cases for formatters."""
 
 import json
-from datetime import datetime
 from pathlib import Path
 
 import pytest
-from repomap.formatters.markdown import MarkdownFormatter
+
 from repomap.formatters.ascii import ASCIIFormatter
-from repomap.formatters.json import JSONFormatter
 from repomap.formatters.html import HTMLFormatter
+from repomap.formatters.json import JSONFormatter
+from repomap.formatters.markdown import MarkdownFormatter
+from datetime import datetime
 
 
 def test_markdown_formatter():

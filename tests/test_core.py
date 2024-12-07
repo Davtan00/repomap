@@ -1,8 +1,10 @@
-"""Tests for the core functionality."""
+"""Test cases for core functionality."""
 
 import os
 from pathlib import Path
+
 import pytest
+
 from repomap.core import ProjectStructureGenerator
 
 

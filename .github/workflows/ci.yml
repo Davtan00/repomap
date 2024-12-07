@@ -50,6 +50,7 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
         fail_ci_if_error: true
+        slug: Davtan00/repomap
 
   lint:
     runs-on: ubuntu-latest
