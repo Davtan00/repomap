@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional, Dict
+from typing import Dict, List, Optional
 
 
 class MarkdownFormatter:
@@ -19,7 +19,11 @@ class MarkdownFormatter:
 
     @staticmethod
     def format_entry(
-        prefix: str, name: str, is_dir: bool, is_last: bool, stats: Optional[Dict] = None
+        prefix: str,
+        name: str,
+        is_dir: bool,
+        is_last: bool,
+        stats: Optional[Dict] = None,
     ) -> str:
         """Format a single entry in the tree."""
         connector = "└── " if is_last else "├── "

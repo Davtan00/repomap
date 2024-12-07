@@ -122,7 +122,9 @@ class HTMLFormatter:
         </div>
         """
 
-    def format_tree(self, root_path: Path, tree_data: Dict[str, Any], max_depth: int) -> str:
+    def format_tree(
+        self, root_path: Path, tree_data: Dict[str, Any], max_depth: int
+    ) -> str:
         """Format the entire tree as an HTML document."""
         html_content = f"""
         <!DOCTYPE html>

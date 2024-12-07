@@ -44,7 +44,10 @@ class ProjectStructureGenerator:
     }
 
     def __init__(
-        self, root_path: str = ".", max_depth: int = 5, output_format: str = OutputFormat.MARKDOWN
+        self,
+        root_path: str = ".",
+        max_depth: int = 5,
+        output_format: str = OutputFormat.MARKDOWN,
     ) -> None:
         self.root_path = Path(root_path).resolve()
         self.max_depth = max_depth
@@ -81,20 +84,27 @@ class ProjectStructureGenerator:
 
         rel_path = str(path.relative_to(self.root_path))
         for pattern in self.ignored_patterns:
-            if fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(path.name, pattern):
+            if fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(
+                path.name, pattern
+            ):
                 return True
         return False
 
     def _get_file_stats(self, path: Path) -> Dict[str, Any]:
         """Get file statistics."""
         stat = path.stat()
-        return {"size": stat.st_size, "last_modified": datetime.fromtimestamp(stat.st_mtime)}
+        return {
+            "size": stat.st_size,
+            "last_modified": datetime.fromtimestamp(stat.st_mtime),
+        }
 
     def generate_tree(self) -> str:
         """Generate the directory tree structure in the specified format."""
         if self.output_format == OutputFormat.JSON:
             tree_data = self._generate_json_tree(self.root_path, current_depth=0)
-            return self._formatter.format_tree(self.root_path, tree_data, self.max_depth)
+            return self._formatter.format_tree(
+                self.root_path, tree_data, self.max_depth
+            )
 
         lines = self._formatter.format_header(self.root_path.name, self.max_depth)
         self._generate_tree(self.root_path, "", lines, is_last=True, current_depth=0)
@@ -109,7 +119,9 @@ class ProjectStructureGenerator:
             return {}
 
         node = self._formatter.create_node(
-            path.name, path.is_dir(), self._get_file_stats(path) if path.is_file() else None
+            path.name,
+            path.is_dir(),
+            self._get_file_stats(path) if path.is_file() else None,
         )
 
         if path.is_dir() and current_depth < self.max_depth:
@@ -130,7 +142,12 @@ class ProjectStructureGenerator:
         return node
 
     def _generate_tree(
-        self, path: Path, prefix: str, lines: List[str], is_last: bool, current_depth: int
+        self,
+        path: Path,
+        prefix: str,
+        lines: List[str],
+        is_last: bool,
+        current_depth: int,
     ) -> None:
         """Recursively generate tree structure with depth limit."""
         if self._should_ignore(path):
@@ -138,7 +155,9 @@ class ProjectStructureGenerator:
 
         if current_depth >= self.max_depth:
             if path.is_dir() and any(True for _ in path.iterdir()):
-                lines.append(f"{prefix}{'└── ' if is_last else '├── '}... (max depth reached)")
+                lines.append(
+                    f"{prefix}{'└── ' if is_last else '├── '}... (max depth reached)"
+                )
             return
 
         entries = sorted(

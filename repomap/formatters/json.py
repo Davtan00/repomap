@@ -10,7 +10,9 @@ class JSONFormatter:
     """Format repository structure as JSON."""
 
     @staticmethod
-    def create_node(name: str, is_dir: bool, stats: Optional[dict] = None) -> Dict[str, Any]:
+    def create_node(
+        name: str, is_dir: bool, stats: Optional[dict] = None
+    ) -> Dict[str, Any]:
         """Create a JSON node for a file or directory."""
         node = {
             "name": name,

@@ -1,8 +1,8 @@
 """Command-line interface for RepoMap."""
 
-import click
 from pathlib import Path
 
+import click
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -35,7 +35,9 @@ def print_stats(path: Path) -> None:
     help="Path to the repository root directory.",
     type=click.Path(exists=True, file_okay=False, dir_okay=True, path_type=Path),
 )
-@click.option("--max-depth", "-d", default=5, help="Maximum depth to traverse.", type=int)
+@click.option(
+    "--max-depth", "-d", default=5, help="Maximum depth to traverse.", type=int
+)
 @click.option(
     "--output",
     "-o",
@@ -72,7 +74,9 @@ def main(path: Path, max_depth: int, output: str, format: str, stats: bool) -> N
         )
 
         output_path = generator.save_to_file(output)
-        console.print(f"\n✨ Project structure has been saved to: [green]{output_path}[/green]")
+        console.print(
+            f"\n✨ Project structure has been saved to: [green]{output_path}[/green]"
+        )
 
     except Exception as e:
         console.print(f"\n[red]Error:[/red] {str(e)}")

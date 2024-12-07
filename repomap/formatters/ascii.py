@@ -21,7 +21,11 @@ class ASCIIFormatter:
 
     @staticmethod
     def format_entry(
-        prefix: str, name: str, is_dir: bool, is_last: bool, stats: Optional[dict] = None
+        prefix: str,
+        name: str,
+        is_dir: bool,
+        is_last: bool,
+        stats: Optional[dict] = None,
     ) -> str:
         """Format a single entry in the tree with optional statistics."""
         connector = "└── " if is_last else "├── "
