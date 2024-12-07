@@ -8,6 +8,7 @@ import pytest
 from repomap.formatters.markdown import MarkdownFormatter
 from repomap.formatters.ascii import ASCIIFormatter
 from repomap.formatters.json import JSONFormatter
+from repomap.formatters.html import HTMLFormatter
 
 def test_markdown_formatter():
     """Test markdown formatter output."""
@@ -91,3 +92,54 @@ def test_json_formatter_parse():
     
     assert parsed['metadata']['version'] == '1.0.0'
     assert parsed['tree']['name'] == 'root'
+
+def test_html_formatter():
+    """Test HTML formatter output."""
+    formatter = HTMLFormatter()
+    
+    # Test header formatting
+    header = formatter.format_header("test_repo", 5)
+    assert "Repository Structure" in header
+    assert "Max depth: 5" in header
+    assert "expandAll" in header
+    assert "collapseAll" in header
+    
+    # Test tree formatting
+    test_tree = {
+        'name': 'root',
+        'type': 'directory',
+        'children': [
+            {
+                'name': 'test.py',
+                'type': 'file',
+                'size_bytes': 1024,
+                'last_modified': '2023-12-07T12:00:00'
+            },
+            {
+                'name': 'test_dir',
+                'type': 'directory',
+                'children': [
+                    {
+                        'name': 'nested.txt',
+                        'type': 'file',
+                        'size_bytes': 512
+                    }
+                ]
+            }
+        ]
+    }
+    
+    html = formatter.format_tree(Path('.'), test_tree, 5)
+    
+    # Check for essential HTML elements
+    assert "<!DOCTYPE html>" in html
+    assert "<html" in html
+    assert "<style>" in html
+    assert "<script>" in html
+    
+    # Check for content
+    assert "test.py" in html
+    assert "test_dir" in html
+    assert "nested.txt" in html
+    assert "1.0 KB" in html  # File size formatting
+    assert "2023-12-07" in html  # Modified date

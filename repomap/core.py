@@ -9,12 +9,14 @@ from typing import List, Set, Optional, Dict, Any
 from .formatters.markdown import MarkdownFormatter
 from .formatters.ascii import ASCIIFormatter
 from .formatters.json import JSONFormatter
+from .formatters.html import HTMLFormatter
 
 class OutputFormat:
     """Supported output formats."""
     MARKDOWN = "markdown"
     ASCII = "ascii"
     JSON = "json"
+    HTML = "html"
 
 class ProjectStructureGenerator:
     # Common directories that should be ignored by default
@@ -49,11 +51,12 @@ class ProjectStructureGenerator:
     def _get_formatter(self):
         """Get the appropriate formatter based on output format."""
         formatters = {
-            OutputFormat.MARKDOWN: MarkdownFormatter,
-            OutputFormat.ASCII: ASCIIFormatter,
-            OutputFormat.JSON: JSONFormatter
+            OutputFormat.MARKDOWN: MarkdownFormatter(),
+            OutputFormat.ASCII: ASCIIFormatter(),
+            OutputFormat.JSON: JSONFormatter(),
+            OutputFormat.HTML: HTMLFormatter()
         }
-        return formatters.get(self.output_format, MarkdownFormatter)
+        return formatters.get(self.output_format, MarkdownFormatter())
     
     def _read_gitignore(self) -> List[str]:
         """Read .gitignore file and return list of patterns to ignore."""
@@ -168,7 +171,10 @@ class ProjectStructureGenerator:
     def save_to_file(self, output_file: Optional[str] = None) -> Path:
         """Generate and save the tree structure to a file."""
         if output_file is None:
-            ext = ".json" if self.output_format == OutputFormat.JSON else ".md"
+            ext = {
+                OutputFormat.JSON: ".json",
+                OutputFormat.HTML: ".html"
+            }.get(self.output_format, ".md")
             output_file = f"project_structure{ext}"
             
         tree_content = self.generate_tree()

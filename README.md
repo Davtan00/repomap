@@ -44,6 +44,9 @@ repomap --format ascii --stats
 
 # Generate JSON output
 repomap --format json --output repo-structure.json
+
+# Generate interactive HTML tree
+repomap --format html
 ```
 
 ## 🛠️ Development

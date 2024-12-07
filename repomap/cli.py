@@ -48,7 +48,7 @@ def print_stats(path: Path) -> None:
 @click.option(
     '--format',
     '-f',
-    type=click.Choice(['markdown', 'ascii', 'json'], case_sensitive=False),
+    type=click.Choice(['markdown', 'ascii', 'json', 'html'], case_sensitive=False),
     default='markdown',
     help='Output format.'
 )
