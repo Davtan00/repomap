@@ -80,8 +80,7 @@ class HTMLFormatter:
                         this.parentElement.querySelector(".nested").classList.toggle("active");
                         this.classList.toggle("caret-down");
                     });
-                }
-                
+                }                
                 // Expand all button
                 document.getElementById("expandAll").addEventListener("click", function() {
                     var elements = document.getElementsByClassName("nested");
@@ -93,7 +92,6 @@ class HTMLFormatter:
                         carets[i].classList.add("caret-down");
                     }
                 });
-                
                 // Collapse all button
                 document.getElementById("collapseAll").addEventListener("click", function() {
                     var elements = document.getElementsByClassName("nested");
