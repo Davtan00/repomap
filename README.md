@@ -1,4 +1,4 @@
-# RepoMap
+# Repodocify
 
 A powerful Python tool for generating repository structure documentation in multiple formats.
 
@@ -24,29 +24,29 @@ A powerful Python tool for generating repository structure documentation in mult
 ## 🚀 Installation
 
 ```bash
-pip install repomap
+pip install repodocify
 ```
 
 ## 📖 Usage
 
 Basic usage:
 ```bash
-repomap
+repodocify
 ```
 
 With options:
 ```bash
 # Generate markdown output (default)
-repomap --path /path/to/repo --max-depth 3
+repodocify --path /path/to/repo --max-depth 3
 
 # Generate ASCII tree with file sizes
-repomap --format ascii --stats
+repodocify --format ascii --stats
 
 # Generate JSON output
-repomap --format json --output repo-structure.json
+repodocify --format json --output repo-structure.json
 
 # Generate interactive HTML tree
-repomap --format html
+repodocify --format html
 ```
 
 ## 🛠️ Development
@@ -60,8 +60,8 @@ This project uses Poetry for dependency management. To set up the development en
 
 2. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/repomap.git
-   cd repomap
+   git clone https://github.com/yourusername/repodocify.git
+   cd repodocify
    ```
 
 3. Install dependencies:
